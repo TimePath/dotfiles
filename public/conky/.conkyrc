@@ -1,0 +1,70 @@
+background no
+
+# better font
+#use_xft no
+#xftfont Monospace:size=8
+#xftalpha 1
+
+update_interval 1.0
+
+alignment top_right
+
+#default_color 03E5E5
+#default_shade_color 1EA2C7
+#default_outline_color white
+
+cpu_avg_samples 2
+net_avg_samples 2
+# Subtract file system buffers from used memory?
+no_buffers yes
+out_to_stderr no
+uppercase no
+use_spacer none
+
+TEXT
+
+${color lightgrey}Uptime${color}    ${alignr}$uptime
+
+${color lightgrey}CPU${color}       ${alignc}${freq_g}GHz${alignr}${cpu}%
+${cpubar}
+
+${color lightgrey}RAM${color}       ${alignc}$mem/$memmax${alignr}$memperc%
+${membar}
+
+${color lightgrey}Swap${color}      ${alignc}$swap/$swapmax${alignr}$swapperc%
+${swapbar}
+
+${color lightgrey}Disk Read${color}    ${alignc}${diskio_read sda}
+${diskiograph_read sda}
+${color lightgrey}Disk Write${color}    ${alignc}${diskio_write sda}
+${diskiograph_write sda}
+
+${color lightgrey}Load${color}      ${alignr}$loadavg 
+${color lightgrey}Processes${color} ${alignr}$processes 
+${color lightgrey}Running${color}   ${alignr}$running_processes 
+
+${color lightgrey}Top CPU${alignr}CPU%
+${color #ddaa00}  ${alignr}${top name 1}${top_mem cpu 1}
+${color lightgrey}${alignr}${top name 2}${top cpu 2}
+${color lightgrey}${alignr}${top name 3}${top cpu 3}
+${color lightgrey}${alignr}${top name 4}${top cpu 4}
+ 
+${color lightgrey}Top RAM${alignr}MEM%
+${color #ddaa00}  ${alignr}${top_mem name 1}${top_mem mem 1}
+${color lightgrey}${alignr}${top_mem name 2}${top_mem mem 2}
+${color lightgrey}${alignr}${top_mem name 3}${top_mem mem 3}
+${color lightgrey}${alignr}${top_mem name 4}${top_mem mem 4}
+
+${color lightgrey}/${color}         ${alignr}${fs_used /}/${fs_size /}
+${fs_bar 6 /}
+
+${color lightgrey}/home${color}     ${alignr}${fs_used /home}/${fs_size /home}
+${fs_bar 6 /home}
+
+${color lightgrey}enp3s0${color}    ${alignr}${addr enp3s0}
+
+${color lightgrey}Up${color}        ${alignr}${upspeed enp3s0}
+${upspeedgraph enp3s0}
+
+${color lightgrey}Down${color}      ${alignr}${downspeed enp3s0}
+${downspeedgraph enp3s0}

@@ -1,0 +1,9 @@
+[user]
+	name = TimePath
+	email = andrew.hardaker1995@gmail.com
+[push]
+	default = simple
+[core]
+	autocrlf = input
+[alias]
+	undo = reset --soft HEAD^

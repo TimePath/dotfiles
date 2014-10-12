@@ -1,0 +1,86 @@
+# http://alsa.opensrc.org/Asoundrc
+# speaker-test -c 2 -D softvol
+# http://billauer.co.il/blog/2014/04/alsa-pipe-playback-capture/
+# /usr/share/sounds/purple/send.wav
+
+#pcm.!default {
+#	type hw
+#	card 0
+#}
+pcm.!default {
+	type plug
+#	slave.pcm "softvol"
+#	slave.pcm "headset"
+	slave.pcm "testing"
+}
+ctl.!default {
+	type hw   
+	card 0
+}
+
+# alias for front:LX3000
+pcm.headset {
+	type hw
+	card 0
+}
+
+# Virtual mic
+pcm.vmic {
+	type file
+	#slave.pcm null # ideal
+	slave.pcm {
+		type null
+	}
+	# speaker >
+	file "/dev/null"
+	# microphone <
+	infile "/home/andrew/vmic.pipe"
+	format "raw"
+}
+
+# Merge vmic and headset
+pcm.merge {
+	type multi
+	slaves {
+		a.pcm "headset"
+		a.channels 1
+
+		b.pcm "vmic"
+		b.channels 1
+	}
+	bindings {
+		0.slave a
+		0.channel 0
+
+		1.slave b
+		1.channel 0
+	}
+}
+
+# Soft volume: http://alsa.opensrc.org/Softvol
+pcm.softvol {
+	type softvol
+	slave.pcm "headset"
+	control {
+		name "SoftMaster"
+		card 0 # ?
+	}
+}
+
+# arecord -D testing -f S16_LE -c1 | aplay -D testing
+pcm.testing {
+	type asym
+	playback.pcm {
+		type plug
+		slave.pcm "softvol"
+	}
+	capture.pcm {
+		type plug
+		slave {
+			#rate 48000
+			#format s16_le
+			channels 2
+			pcm "merge"
+		}
+	}
+}

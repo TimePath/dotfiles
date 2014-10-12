@@ -1,0 +1,3 @@
+[submodule "public/xonotic/.xonotic/data"]
+	path = public/xonotic/.xonotic/data
+	url = git@github.com:TimePath/xonotic-config.git

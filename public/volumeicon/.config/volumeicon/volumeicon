@@ -1,0 +1,26 @@
+[StatusIcon]
+stepsize=2
+lmb_slider=false
+mmb_mute=false
+use_horizontal_slider=true
+show_sound_level=true
+use_transparent_background=true
+onclick=xterm -e 'alsamixer'
+theme=Default
+
+[Hotkeys]
+up_enabled=true
+down_enabled=true
+mute_enabled=true
+up=XF86AudioRaiseVolume
+down=XF86AudioLowerVolume
+mute=XF86AudioMute
+
+[Alsa]
+decibel_scale=false
+card=default
+channel=SoftMaster
+
+[Notification]
+show_notification=true
+notification_type=0
