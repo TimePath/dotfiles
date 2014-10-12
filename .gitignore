@@ -4,4 +4,6 @@
 private
 !public/**
 
+!/update.sh
 *.ttf
+
