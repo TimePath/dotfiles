@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=startup.sh
+Exec=/home/andrew/Scripts/startup.sh
